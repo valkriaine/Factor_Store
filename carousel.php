@@ -16,7 +16,6 @@ function create_banners($data = array())
         }
         else
             echo $item_forehead;
-
         create_banner($row['NAME'], $row['DESCRIPTION'], $row['ICON_PATH'], $row['SPLASH_PATH']);
         echo $item_tail;
     }

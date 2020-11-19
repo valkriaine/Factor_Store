@@ -1,5 +1,4 @@
 <?php
-
 $conn = mysqli_connect('localhost', 'ywangf20', 'valkriaine', 'C354_ywangf20');
 
 //check if the username exists in database

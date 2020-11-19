@@ -30,7 +30,7 @@ function upload($description,
              '$productivity',
              '$entertainment',
              '$utility',
-             '$quick_app')";
+             '$quick_app', 0)";
 
         $result =  mysqli_query($conn, $sql);
         if ($result == true)
@@ -62,7 +62,6 @@ function check_existence_factor($name)
 function search_factor($term)
 {
     global $conn;
-
     $sql = "select * from FACTOR where NAME like '%$term%'";
     $result = mysqli_query($conn, $sql);
     $data = [];
@@ -120,4 +119,70 @@ function get_id_factor($name)
     {
         return -1;
     }
+}
+
+
+function get_factor($id)
+{
+    global $conn;
+
+    $sql = "select * from FACTOR where ID = '$id'";
+    $result = mysqli_query($conn, $sql);
+    $data = [];
+    while($row = mysqli_fetch_assoc($result))
+        $data[] = $row;
+    return $data;
+}
+
+function filter_factor($category)
+{
+    global $conn;
+    if ($category == 'PRODUCTIVITY')
+    {
+        $sql = "select * from FACTOR where PRODUCTIVITY = 1";
+    }
+    else if ($category == 'ENTERTAINMENT')
+    {
+        $sql = "select * from FACTOR where ENTERTAINMENT = 1";
+    }
+    else if ($category == 'UTILITY')
+    {
+        $sql = "select * from FACTOR where UTILITY = 1";
+    }
+    else if ($category == 'QUICK_APP')
+    {
+        $sql = "select * from FACTOR where QUICK_APP = 1";
+    }
+    else
+        $sql = "select * from FACTOR";
+
+    $result = mysqli_query($conn, $sql);
+    $data = [];
+    while($row = mysqli_fetch_assoc($result))
+        $data[] = $row;
+    return $data;
+}
+
+
+function get_comments($item_id)
+{
+    global $conn;
+    $sql = "select * from COMMENTS where FACTOR_ID = '$item_id'";
+    $result = mysqli_query($conn, $sql);
+    $data = [];
+    while($row = mysqli_fetch_assoc($result))
+        $data[] = $row;
+    return $data;
+}
+
+function add_comment($item_id, $user_id, $comment)
+{
+    global $conn;
+    $current_date = date("Ymd");
+    $sql = "INSERT INTO COMMENTS VALUES ('$item_id', '$user_id', '$current_date', '$comment')";
+    $result = mysqli_query($conn, $sql);
+    if ($result == true)
+        return $result;
+    else
+        return -1;
 }

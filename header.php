@@ -1,7 +1,8 @@
 <?php
 if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
 {
-    exit();
+    header("https://cs.tru.ca/~ywangf20/Project/controller.php");
+    die();
 }
 
 ?>
@@ -25,7 +26,7 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
              id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" onclick="filterList('no filter')">
                         Home
                         <span class="sr-only">
                             (current)</span></a>
@@ -40,11 +41,11 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
                         Categories
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Productivity</a>
-                        <a class="dropdown-item" href="#">Entertainment</a>
-                        <a class="dropdown-item" href="#">Utility</a>
+                        <a class="dropdown-item" onclick="filterList('PRODUCTIVITY')">Productivity</a>
+                        <a class="dropdown-item" onclick="filterList('ENTERTAINMENT')">Entertainment</a>
+                        <a class="dropdown-item" onclick="filterList('UTILITY')">Utility</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Quick Apps</a>
+                        <a class="dropdown-item" onclick="filterList('QUICK_APP')">Quick Apps</a>
                     </div>
             </ul>
 
@@ -61,6 +62,7 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
                         <a class="dropdown-item" id="dropdown-register" href="#register-modal" data-toggle="modal">Register</a>
                         <a class="dropdown-item" id="dropdown-settings" href="#settings-modal" data-toggle="modal">Settings</a>
                         <a class="dropdown-item" id="dropdown-upload" href="#upload-modal" data-toggle="modal">Upload</a>
+                        <!--todo-->
                         <a class="dropdown-item" id="dropdown-my-cart" href="#" data-toggle="modal">My Cart</a>
                         <a class="dropdown-item" id="dropdown-wishlist" href="#" data-toggle="modal">Wishlist</a>
                         <a class="dropdown-item" id="dropdown-favorites" href="#" data-toggle="modal">Favorites</a>
@@ -71,8 +73,8 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
                 <!--search bar-->
             <form class="form-inline my-2 my-lg-0" style="margin-left: 15px">
                 <div class="input-group">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-sm btn-outline-secondary" type="submit">Search</button>
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
+                <button class="btn btn-sm btn-outline-secondary" type="button" id="search-button">Search</button>
                 </div>
             </form>
             </div>
@@ -521,6 +523,8 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
                         else
                             alert('An error occurred, code: ' + code);
 
+                        filterList('no filter');
+
                     },
                     error: function (jqXHR, textStatus, errorThrown)
                     {
@@ -529,6 +533,28 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
                 });
         })
 
+        $('#search-button').click(function ()
+        {
+            $.ajax(
+                {
+                    url : 'ajax.php',
+                    type: "POST",
+                    data : {
+                        page: 'store_page', command: 'Search',
+                        term: $('#search-input').val()
+                    },
+                    success: function(data)
+                    {
+                        const list = JSON.parse(data);
+                        $('#factor-list').html(list);
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown)
+                    {
+                        alert("Error: " + errorThrown);
+                    }
+                });
+        })
     })
 
     function checkSignedIn()
@@ -617,6 +643,25 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
                 {
                     const id = JSON.parse(data);
                     $('#author-id').text("Author ID: " + id);
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert("Error: " + errorThrown);
+                }
+            });
+    }
+
+    function filterList(type)
+    {
+        $.ajax(
+            {
+                url : 'ajax.php',
+                type: "POST",
+                data : {page: 'header', command: 'Filter', category: type},
+                success: function(data)
+                {
+                    const list = JSON.parse(data);
+                    $('#factor-list').html(list);
                 },
                 error: function (jqXHR, textStatus, errorThrown)
                 {

@@ -4,7 +4,7 @@ function create_banner($name, $description, $icon, $splash)
     echo '<div class="card bg-dark text-white">';
     echo '<img src=';
     echo '"'.$splash.'"';
-    echo ' style="object-fit: cover; height: 400px; filter: blur(10px); opacity: 50%" class="card-img" alt="...">';
+    echo ' style="object-fit: cover; height: 400px; filter: blur(10px); opacity: 50%" class="card-img" alt="Banner image">';
     echo ' <div class="card-img-overlay row">
         <div class="card text-center w-50 mx-auto" style="max-width: 540px; max-height: 200px; background-color: dimgray">
             <div class="row no-gutters" >
@@ -21,7 +21,7 @@ function create_banner($name, $description, $icon, $splash)
 </div>';
 }
 ?>
-<!--
+<!-- todo: restyle this to be more responsive and visually appealing
 <head>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
