@@ -1,4 +1,6 @@
 <?php
+require_once("model_user.php");
+require_once("model_factor.php");
 if (!isset($_SESSION['started']))
 {
     session_start();

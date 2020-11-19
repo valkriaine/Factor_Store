@@ -1,6 +1,6 @@
 <?php
-require ("model_user.php");
-require ("model_factor.php");
+require_once("model_user.php");
+require_once("model_factor.php");
 require_once("banner.php");
 include_once("libs.html");
 include_once( 'header.php');
