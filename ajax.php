@@ -30,12 +30,13 @@ else
             {
                 echo json_encode($validity);
             }
-            else if($validity == 0) //username matches password in database, move to mainpage
+            else if($validity == 0) //username matches password in database, successfully signed in
             {
                 $ID = get_id($username);
                 $_SESSION['SignIn'] = 'YES';
                 $_SESSION['username'] = $username;
                 $_SESSION['id'] = $ID;
+                $_SESSION['type'] = get_user_type($ID);
                 echo json_encode($validity);
             }
             break;
@@ -51,6 +52,10 @@ else
             }
             else //registered successfully
             {
+                $_SESSION['SignIn'] = 'YES';
+                $_SESSION['username'] = $username;
+                $_SESSION['id'] = get_id($username);
+                $_SESSION['type'] = get_user_type(get_id($username));
                 echo json_encode($code);
             }
             break;
@@ -63,6 +68,48 @@ else
             else
             {
                 echo json_encode(1);
+            }
+            break;
+        case 'Get_Type': //retrieve user type
+            if(isset($_SESSION['SignIn']))
+            {
+                //return 0 for normal user
+                //return 1 for designer
+                $type = $_SESSION['type'];
+                echo json_encode($type);
+            }
+            else
+            {
+                //user not signed in
+                echo json_encode("You are not signed in.");
+            }
+            break;
+        case 'Update': //update user info
+            if(isset($_SESSION['SignIn']))
+            {
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+                $email = $_POST['email_settings'];
+                $type = $_POST['type'];
+                $result = update_user($username, $email, $password, $type);
+                echo json_encode($result);
+            }
+            else
+            {
+                //user not signed in
+                echo json_encode("You are not signed in.");
+            }
+            break;
+        case 'Delete': //delete the user account
+            if(isset($_SESSION['SignIn']))
+            {
+                $result = delete_user($_SESSION['id']);
+                echo json_encode($result);
+            }
+            else
+            {
+                //user not signed in
+                echo json_encode("You are not signed in.");
             }
             break;
         case 'SignOut': //sign out and clear the session

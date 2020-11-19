@@ -78,6 +78,26 @@ function get_name($user_id)
     }
 }
 
+//return name given id
+function get_user_type($user_id)
+{
+    global $conn;
+    $sql = "SELECT * FROM FACTOR_USERS WHERE ID = '$user_id'";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0)
+    {
+        $row = mysqli_fetch_assoc($result);
+        return $row['TYPE'];
+        //return 0 for normal user
+        //return 1 for designer
+    }
+    else
+    {
+        return -1;
+    }
+}
+
 
 //return id given name
 function get_id($username)
@@ -95,4 +115,46 @@ function get_id($username)
     {
         return -1;
     }
+}
+
+function update_user($name, $email, $password, $type)
+{
+    global $conn;
+    $id = $_SESSION['id'];
+
+    $sql = "UPDATE `FACTOR_USERS` SET 
+    `NAME` = '$name', 
+    `EMAIL` = '$email', 
+    `PASSWORD` = '$password', 
+    `TYPE` = '$type'
+    where `ID` = '$id' ";
+
+    if (mysqli_query($conn, $sql))
+    {
+        $_SESSION['SignIn'] = 'YES';
+        $_SESSION['username'] = $name;
+        $_SESSION['id'] = $id;
+        $_SESSION['type'] = get_user_type($id);
+        return 0; //updated successfully
+    }
+    else
+        return mysqli_error($conn); //sql error
+
+}
+
+function delete_user($id)
+{
+    global $conn;
+
+    $sql = "DELETE FROM `FACTOR_USERS` where `ID` = '$id' ";
+
+    if (mysqli_query($conn, $sql))
+    {
+        $result =  session_unset();  //deleted successfully
+        session_destroy();
+        return $result;
+    }
+    else
+        return mysqli_error($conn); //sql error
+
 }

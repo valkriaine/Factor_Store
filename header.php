@@ -1,4 +1,4 @@
-<?php if (isset($_SESSION['SignIn'])) $username = $_SESSION['username']; ?>
+<?php  ?>
 <html lang="en">
 <div class="sticky-top">
     <nav style="margin: 0 200px"
@@ -55,6 +55,7 @@
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" id="dropdown-sign-in" href="#sign-in-modal" data-toggle="modal">Sign In</a>
                         <a class="dropdown-item" id="dropdown-register" href="#register-modal" data-toggle="modal">Register</a>
+                        <a class="dropdown-item" id="dropdown-settings" href="#settings-modal" data-toggle="modal">Settings</a>
                         <a class="dropdown-item" id="dropdown-my-cart" href="#" data-toggle="modal">My Cart</a>
                         <a class="dropdown-item" id="dropdown-wishlist" href="#" data-toggle="modal">Wishlist</a>
                         <a class="dropdown-item" id="dropdown-favorites" href="#" data-toggle="modal">Favorites</a>
@@ -84,13 +85,13 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal-header-sign-in">Sign In</h5>
+                <h5 class="modal-title">Sign In</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="form-sign-in" method="POST" action='controller.php'>
+                <form id="form-sign-in" method="POST">
                     <div class="form-group">
                         <label for="username-sign-in">Username:</label>
                         <input type="text" class="form-control" id="username-sign-in" name="username" required>
@@ -117,15 +118,13 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal-header-register">Register</h5>
+                <h5 class="modal-title">Register</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="form-join" method="POST" action='ajax.php'>
-                    <input type='hidden' name='page' value='StartPage'>
-                    <input type='hidden' name='command' value='Join'>
+                <form id="form-join" method="POST">
                     <div class="form-group">
                         <label for="username-register">Username:</label>
                         <input type="text" class="form-control" id="username-register" name="username" required>
@@ -147,10 +146,71 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+<!--Settings Modal -->
+<div class="modal fade" id="settings-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update My Info</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-join" method="POST">
+                    <div class="form-group">
+                        <label for="username-settings">Username:</label>
+                        <input type="text" class="form-control" id="username-settings" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password-settings">New Password:</label>
+                        <input type="password" class="form-control" id="password-settings" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password-settings-confirm">Confirm New Password:</label>
+                        <input type="password" class="form-control" id="password-settings-confirm" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email-settings">Email:</label>
+                        <input type="text" class="form-control" id="email-settings" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>I am a: </label>
+                    <div class="btn-group btn-group-toggle" role="group" data-toggle="buttons">
+                        <label class="btn btn-secondary btn-light active">
+                            <input type="radio" name="options" id="type-user-toggle">User
+                        </label>
+                        <label class="btn btn-secondary btn-light">
+                            <input type="radio" name="options" id="type-designer-toggle">Designer
+                        </label>
+                    </div>
+                    </div>
+
+                    <div class="form-group" role="group" >
+                        <button type="button" id="settings-button" class="btn btn-secondary text-left" data-dismiss="modal">Update</button>
+                        <input type="reset" class="btn btn-secondary text-left"/>
+                        <button type="button" class="btn btn-danger text-left" data-dismiss="modal">Cancel</button>
+                        <button type="button" id="settings-delete" class="btn btn-warning text-right" data-dismiss="modal">Delete My Account</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 </html>
 
 
 <script>
+
+    let global_type = 0;
+
     $(document).ready(function()
     {
         checkSignedIn();
@@ -170,7 +230,9 @@
                         }
                         else if (message === 0)
                         {
-                            alert("registered successfully");
+                            checkSignedIn();
+                            alert("registered successfully, you are now automatically signed in.");
+
                         }
                     },
                     error: function (jqXHR, textStatus, errorThrown)
@@ -217,7 +279,46 @@
                 });
         });
 
-        $('#dropdown-sign-out').click(function ()
+        $("#settings-button").click(function()
+        {
+            const password = $('#password-settings').val();
+            if (password !== $('#password-settings-confirm').val())
+            {
+                alert("Passwords do not match, please confirm again");
+            }
+            else
+            {
+                $.ajax(
+                    {
+                        url : 'ajax.php',
+                        type: "POST",
+                        data : {page: 'header', command: 'Update',
+                            username: $('#username-settings').val(),
+                            password: password,
+                            email_settings: $('#email-settings').val(),
+                            type: global_type
+                        },
+                        success: function(data)
+                        {
+                            const message = JSON.parse(data);
+                            if (message === 0)
+                            {
+                                checkSignedIn();
+                            }
+                            else
+                                alert(message);
+
+                        },
+                        error: function (jqXHR, textStatus, errorThrown)
+                        {
+                            alert("Error: " + errorThrown);
+                        }
+                    });
+            }
+
+        });
+
+        $('#dropdown-sign-out').click(function()
         {
             $.ajax(
                 {
@@ -230,7 +331,6 @@
                         if (code === true)
                         {
                             checkSignedIn();
-                            $('#username-nav').text('');
                         }
                     },
                     error: function (jqXHR, textStatus, errorThrown)
@@ -239,6 +339,41 @@
                     }
                 });
         });
+
+        $('#type-user-toggle').click(function ()
+        {
+            global_type = 0;
+        })
+
+        $('#type-designer-toggle').click(function ()
+        {
+            global_type = 1;
+        })
+
+        $('#settings-delete').click(function ()
+        {
+            $.ajax(
+                {
+                    url : 'ajax.php',
+                    type: "POST",
+                    data : {page: 'header', command: 'Delete'},
+                    success: function(data)
+                    {
+                        const code = JSON.parse(data);
+                        if (code === true)
+                        {
+                            checkSignedIn();
+                            alert("Account deleted. You are now logged off.");
+                        }
+                        else
+                            alert("an error occurred");
+                    },
+                    error: function (jqXHR, textStatus, errorThrown)
+                    {
+                        alert("Error: " + errorThrown);
+                    }
+                });
+        })
     })
 
     function checkSignedIn()
@@ -253,22 +388,26 @@
                     const name = JSON.parse(data);
                     if (name === 1) //not signed in
                     {
+                        $('#username-nav').text('');
                         $('#dropdown-sign-in').show();
                         $('#dropdown-register').show();
+                        $('#dropdown-settings').hide();
                         $('#dropdown-favorites').hide();
                         $('#dropdown-my-cart').hide();
                         $('#dropdown-wishlist').hide();
                         $('#dropdown-sign-out').hide();
                     }
-                    else
+                    else //signed in
                     {
                         $('#username-nav').text(name);
                         $('#dropdown-sign-in').hide();
                         $('#dropdown-register').hide();
+                        $('#dropdown-settings').show();
                         $('#dropdown-favorites').show();
                         $('#dropdown-my-cart').show();
                         $('#dropdown-wishlist').show();
                         $('#dropdown-sign-out').show();
+                        getUserType();
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown)
@@ -277,5 +416,39 @@
                 }
             });
     }
+
+
+    function getUserType()
+    {
+        $.ajax(
+            {
+                url : 'ajax.php',
+                type: "POST",
+                data : {page: 'header', command: 'Get_Type'},
+                success: function(data)
+                {
+                    const type = JSON.parse(data);
+                    if (type === '0') //normal user
+                    {
+                        $('#type-user-toggle').click();
+                    }
+                    else if (type === '1') //designer
+                    {
+                        $('#type-designer-toggle').click();
+                    }
+                    else
+                    {
+                        alert(type);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert("Error: " + errorThrown);
+                }
+            });
+    }
+
+
+
 
 </script>
