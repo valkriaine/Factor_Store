@@ -11,9 +11,6 @@ if (empty($_POST['page']))
 }
 else
 {
-    require ("model_user.php");
-    require ("model_factor.php");
-
     $command = $_POST['command'];
 
     switch ($command)
@@ -40,6 +37,8 @@ else
                 echo json_encode($validity);
             }
             break;
+
+
         case 'Join': //register for new user
             $username = $_POST['username'];
             $password = $_POST['password'];
@@ -59,6 +58,8 @@ else
                 echo json_encode($code);
             }
             break;
+
+
         case 'Get_Name': //retrieve username after logging in
             if(isset($_SESSION['SignIn']))
             {
@@ -70,6 +71,8 @@ else
                 echo json_encode(1);
             }
             break;
+
+
         case 'Get_Type': //retrieve user type
             if(isset($_SESSION['SignIn']))
             {
@@ -84,6 +87,25 @@ else
                 echo json_encode("You are not signed in.");
             }
             break;
+
+
+        case 'Get_Author_ID': //retrieve designer ID
+            if(isset($_SESSION['SignIn']))
+            {
+                $type = $_SESSION['type'];
+                if ($type == 1)
+                    echo json_encode($_SESSION['id']);
+                else
+                    echo json_encode("You are not a designer.");
+            }
+            else
+            {
+                //user not signed in
+                echo json_encode("You are not signed in.");
+            }
+            break;
+
+
         case 'Update': //update user info
             if(isset($_SESSION['SignIn']))
             {
@@ -100,6 +122,8 @@ else
                 echo json_encode("You are not signed in.");
             }
             break;
+
+
         case 'Delete': //delete the user account
             if(isset($_SESSION['SignIn']))
             {
@@ -112,6 +136,46 @@ else
                 echo json_encode("You are not signed in.");
             }
             break;
+
+        case 'Upload': //upload a new widget
+            if(isset($_SESSION['SignIn']))
+            {
+                //todo: optimize this
+                $description = $_POST['description'];
+                $creator = $_SESSION['id'];
+                $name  = $_POST['name'];
+                $path = "";
+                $icon_path = "";
+                $splash_path = "";
+                $price = $_POST['price'];
+                $productivity = $_POST['productivity'];
+                $entertainment = $_POST['entertainment'];
+                $utility = $_POST['utility'];
+                $quick_app = $_POST['quick_app'];
+
+                $result =
+                    upload($description,
+                            $creator,
+                            $name,
+                            $path,
+                            $icon_path,
+                            $splash_path,
+                            $price,
+                            $productivity,
+                            $entertainment,
+                            $utility,
+                            $quick_app);
+
+                echo json_encode($result);
+            }
+            else
+            {
+                //user not signed in
+                echo json_encode("You are not signed in.");
+            }
+            break;
+
+
         case 'SignOut': //sign out and clear the session
             echo json_encode(session_unset());
             session_destroy();

@@ -1,11 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="c4f59730-e963-4cba-ac32-b8269a334731" name="Default Changelist" comment="finished user log in and log out features">
+    <list default="true" id="c4f59730-e963-4cba-ac32-b8269a334731" name="Default Changelist" comment="finished user account management features">
+      <change afterPath="$PROJECT_DIR$/download_resources/1_icon.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/download_resources/1_splash.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/download_resources/2_icon.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/download_resources/2_splash.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/download_resources/3_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/download_resources/3_splash.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/download_resources/4_icon.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/download_resources/4_splash.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ajax.php" beforeDir="false" afterPath="$PROJECT_DIR$/ajax.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/banner.php" beforeDir="false" afterPath="$PROJECT_DIR$/banner.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carousel.php" beforeDir="false" afterPath="$PROJECT_DIR$/carousel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/model_user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_factor.php" beforeDir="false" afterPath="$PROJECT_DIR$/model_factor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_page.php" beforeDir="false" afterPath="$PROJECT_DIR$/store_page.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +71,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/download_resources" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -52,14 +82,15 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\valkr\PhpstormProjects\web_project\resources" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\valkr\PhpstormProjects\web_project" />
       <recent name="C:\Users\valkr\PhpstormProjects\web_project\resources" />
       <recent name="C:\Users\valkr\PhpstormProjects\web_project\components" />
       <recent name="C:\Users\valkr\PhpstormProjects\web_project\components\carousel_resources" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\valkr\PhpstormProjects\web_project\download_resources" />
+      <recent name="C:\Users\valkr\PhpstormProjects\web_project\resources" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -72,7 +103,7 @@
       <updated>1605663930518</updated>
       <workItem from="1605663932515" duration="27124000" />
       <workItem from="1605694746518" duration="8937000" />
-      <workItem from="1605743917892" duration="7461000" />
+      <workItem from="1605743917892" duration="22100000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1605698861439</created>
@@ -88,16 +119,35 @@
       <option name="project" value="LOCAL" />
       <updated>1605703321417</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="finished user account management features">
+      <created>1605751490985</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1605751490985</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
     <MESSAGE value="finished user log in and log out features" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished user log in and log out features" />
+    <MESSAGE value="finished user account management features" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished user account management features" />
   </component>
   <component name="WindowStateProjectService">
     <state x="605" y="211" key="#CLI_Interpreters" timestamp="1605669699168">
@@ -136,9 +186,9 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="710" y="257" key="SettingsEditor/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605703661695" />
-    <state x="744" y="295" key="Vcs.Push.Dialog.v2" timestamp="1605703546635">
+    <state x="744" y="295" key="Vcs.Push.Dialog.v2" timestamp="1605751497069">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="744" y="295" key="Vcs.Push.Dialog.v2/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605703546635" />
+    <state x="744" y="295" key="Vcs.Push.Dialog.v2/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605751497069" />
   </component>
 </project>

@@ -1,4 +1,10 @@
-<?php  ?>
+<?php
+if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
+{
+    exit();
+}
+
+?>
 <html lang="en">
 <div class="sticky-top">
     <nav style="margin: 0 200px"
@@ -43,8 +49,6 @@
             </ul>
 
             <div class="btn-group align-items-center">
-
-
                 <div class="btn-group dropdown">
                     <img src="resources/user.png"
                          class="align-self-center"
@@ -56,6 +60,7 @@
                         <a class="dropdown-item" id="dropdown-sign-in" href="#sign-in-modal" data-toggle="modal">Sign In</a>
                         <a class="dropdown-item" id="dropdown-register" href="#register-modal" data-toggle="modal">Register</a>
                         <a class="dropdown-item" id="dropdown-settings" href="#settings-modal" data-toggle="modal">Settings</a>
+                        <a class="dropdown-item" id="dropdown-upload" href="#upload-modal" data-toggle="modal">Upload</a>
                         <a class="dropdown-item" id="dropdown-my-cart" href="#" data-toggle="modal">My Cart</a>
                         <a class="dropdown-item" id="dropdown-wishlist" href="#" data-toggle="modal">Wishlist</a>
                         <a class="dropdown-item" id="dropdown-favorites" href="#" data-toggle="modal">Favorites</a>
@@ -63,9 +68,7 @@
                     </div>
                 </div>
 
-
-
-
+                <!--search bar-->
             <form class="form-inline my-2 my-lg-0" style="margin-left: 15px">
                 <div class="input-group">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -91,7 +94,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="form-sign-in" method="POST">
+                <form method="POST">
                     <div class="form-group">
                         <label for="username-sign-in">Username:</label>
                         <input type="text" class="form-control" id="username-sign-in" name="username" required>
@@ -124,7 +127,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="form-join" method="POST">
+                <form method="POST">
                     <div class="form-group">
                         <label for="username-register">Username:</label>
                         <input type="text" class="form-control" id="username-register" name="username" required>
@@ -162,7 +165,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="form-join" method="POST">
+                <form method="POST">
                     <div class="form-group">
                         <label for="username-settings">Username:</label>
                         <input type="text" class="form-control" id="username-settings" name="username" required>
@@ -204,12 +207,100 @@
 </div>
 
 
+
+
+
+
+
+<!--Upload modal-->
+<div class="modal fade" id="upload-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Upload my design</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST">
+                    <div class="form-group">
+                        <label id="author-id">Author ID: </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="factor-name">Name of your design: </label>
+                        <input type="text" class="form-control" id="factor-name" name="name" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label>Categories: </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="productivity-checkbox">
+                        <label class="form-check-label" for="productivity-checkbox">
+                            Productivity
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="entertainment-checkbox">
+                        <label class="form-check-label" for="entertainment-checkbox">
+                            Entertainment
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="utility-checkbox">
+                        <label class="form-check-label" for="utility-checkbox">
+                            Utility
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="quick-app-checkbox">
+                        <label class="form-check-label" for="quick-app-checkbox">
+                            Quick App
+                        </label>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="description">Description: </label>
+                        <textarea class="form-control" id="description" rows="5"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Upload your package: </label>
+                        <input type="file" class="form-control-file" data-icon="true">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label" for="upload-price">Price: </label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">$</div>
+                            </div>
+                            <input type="number" class="form-control" id="upload-price" placeholder="0.00">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" role="group">
+                        <br>
+                        <button type="button" id="upload-button" class="btn btn-secondary text-left" data-dismiss="modal">Upload</button>
+                        <input type="reset" class="btn btn-secondary text-left"/>
+                        <button type="button" class="btn btn-danger text-left" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 </html>
 
 
 <script>
 
     let global_type = 0;
+
 
     $(document).ready(function()
     {
@@ -374,6 +465,70 @@
                     }
                 });
         })
+
+        $('#upload-button').click(function ()
+        {
+            let productivity,
+                entertainment,
+                utility,
+                quick_app,
+                price;
+
+            if($('#productivity-checkbox').is(":checked"))
+                productivity = 1;
+            else
+                productivity = 0;
+
+            if($('#entertainment-checkbox').is(":checked"))
+                entertainment = 1;
+            else
+                entertainment = 0;
+
+            if($('#utility-checkbox').is(":checked"))
+                utility = 1;
+            else
+                utility = 0;
+
+            if($('#quick-app-checkbox').is(":checked"))
+                quick_app = 1;
+            else
+                quick_app = 0;
+
+            price = $('#upload-price').val();
+            if (price.length < 1)
+                price = 0;
+
+
+            $.ajax(
+                {
+                    url : 'ajax.php',
+                    type: "POST",
+                    data : {page: 'header',
+                        command: 'Upload',
+                        description: $('#description').val(),
+                        name: $('#factor-name').val(),
+                        price: price,
+                        productivity: productivity,
+                        entertainment: entertainment,
+                        utility: utility,
+                        quick_app: quick_app
+                    },
+                    success: function(data)
+                    {
+                        const code = JSON.parse(data);
+                        if (code === 0)
+                            alert('Uploaded successfully');
+                        else
+                            alert('An error occurred, code: ' + code);
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown)
+                    {
+                        alert("Error: " + errorThrown);
+                    }
+                });
+        })
+
     })
 
     function checkSignedIn()
@@ -391,6 +546,7 @@
                         $('#username-nav').text('');
                         $('#dropdown-sign-in').show();
                         $('#dropdown-register').show();
+                        $('#dropdown-upload').hide();
                         $('#dropdown-settings').hide();
                         $('#dropdown-favorites').hide();
                         $('#dropdown-my-cart').hide();
@@ -417,7 +573,6 @@
             });
     }
 
-
     function getUserType()
     {
         $.ajax(
@@ -431,10 +586,13 @@
                     if (type === '0') //normal user
                     {
                         $('#type-user-toggle').click();
+                        $('#dropdown-upload').hide();
                     }
                     else if (type === '1') //designer
                     {
                         $('#type-designer-toggle').click();
+                        $('#dropdown-upload').show();
+                        getCreatorID()
                     }
                     else
                     {
@@ -448,7 +606,23 @@
             });
     }
 
-
-
+    function getCreatorID()
+    {
+        $.ajax(
+            {
+                url : 'ajax.php',
+                type: "POST",
+                data : {page: 'header', command: 'Get_Author_ID'},
+                success: function(data)
+                {
+                    const id = JSON.parse(data);
+                    $('#author-id').text("Author ID: " + id);
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert("Error: " + errorThrown);
+                }
+            });
+    }
 
 </script>
