@@ -143,7 +143,6 @@ else
         case 'Upload': //upload a new widget
             if(isset($_SESSION['SignIn']))
             {
-                //todo: optimize this
                 $description = $_POST['description'];
                 $creator = $_SESSION['id'];
                 $name  = $_POST['name'];
@@ -169,7 +168,26 @@ else
                             $utility,
                             $quick_app);
 
-                echo json_encode($result);
+                if ($result == 0)
+                {
+                    $result_update = update_paths($name);
+                    if ($result_update == true)
+                    {
+                        echo json_encode(0);
+                        unset($_SESSION['widget_name']);
+                        unset($_SESSION['package_path']);
+                        unset($_SESSION['package_uploaded']);
+                        unset($_SESSION['splash_image_path']);
+                        unset($_SESSION['splash_uploaded']);
+                        unset($_SESSION['icon_image_path']);
+                        unset($_SESSION['icon_uploaded']);
+                    }
+
+                    else
+                        echo json_encode('error updating paths');
+                }
+                else
+                    echo json_encode($result);
             }
             else
             {

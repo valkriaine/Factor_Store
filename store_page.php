@@ -4,7 +4,6 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
     die();
 }
 include_once("carousel.php");
-
 ?>
 <html lang="en">
 <body style="background: #eee">

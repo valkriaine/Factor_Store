@@ -216,7 +216,7 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
 
 <!--Upload modal-->
 <div class="modal fade" id="upload-modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Upload my design</h5>
@@ -226,7 +226,7 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
             </div>
             <div class="modal-body">
                 <form method="POST">
-                    <div class="form-group">
+                    <div>
                         <label id="author-id">Author ID: </label>
                     </div>
                     <div class="form-group">
@@ -234,7 +234,7 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
                         <input type="text" class="form-control" id="factor-name" name="name" required>
                     </div>
                     <br>
-                    <div class="form-group">
+                    <div>
                         <label>Categories: </label>
                     </div>
                     <div class="form-check">
@@ -266,10 +266,21 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
                         <label for="description">Description: </label>
                         <textarea class="form-control" id="description" rows="5"></textarea>
                     </div>
+
                     <div class="form-group">
                         <label class="control-label">Upload your package: </label>
-                        <input type="file" class="form-control-file" data-icon="true">
+                        <form enctype="multipart/form-data" action="action.php" method="POST">
+                        </form>
                     </div>
+
+                    <form enctype="multipart/form-data" action="action.php" method="POST" id="upload-form"><br />
+                        <label class="control-label">Widget Icon: </label>
+                        <input name="icon-upload" type="file" class="form-control-file" data-icon="true"/><br />
+                        <label class="control-label">Widget Banner: </label>
+                        <input name="splash-upload" type="file" class="form-control-file" data-icon="true"> <br />
+                        <label class="control-label">Widget HTML File: </label>
+                        <input name="factor-upload" type="file" class="form-control-file" data-icon="true">
+                    </form>
 
 
                     <div class="form-group">
@@ -285,10 +296,10 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
 
                     <div class="form-group" role="group">
                         <br>
-                        <button type="button" id="upload-button" class="btn btn-secondary text-left" data-dismiss="modal">Upload</button>
+                        <button type="button" id="upload-button" class="btn btn-secondary text-left">Upload</button>
                         <input type="reset" class="btn btn-secondary text-left"/>
                         <button type="button" class="btn btn-danger text-left" data-dismiss="modal">Cancel</button>
-                    </div>
+                       </div>
                 </form>
             </div>
         </div>
@@ -302,8 +313,6 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
 <script>
 
     let global_type = 0;
-
-
     $(document).ready(function()
     {
         checkSignedIn();
@@ -470,58 +479,87 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
 
         $('#upload-button').click(function ()
         {
-            let productivity,
-                entertainment,
-                utility,
-                quick_app,
-                price;
-
-            if($('#productivity-checkbox').is(":checked"))
-                productivity = 1;
-            else
-                productivity = 0;
-
-            if($('#entertainment-checkbox').is(":checked"))
-                entertainment = 1;
-            else
-                entertainment = 0;
-
-            if($('#utility-checkbox').is(":checked"))
-                utility = 1;
-            else
-                utility = 0;
-
-            if($('#quick-app-checkbox').is(":checked"))
-                quick_app = 1;
-            else
-                quick_app = 0;
-
-            price = $('#upload-price').val();
-            if (price.length < 1)
-                price = 0;
-
-
+            let formData = new FormData(document.getElementById('upload-form'));
             $.ajax(
                 {
-                    url : 'ajax.php',
-                    type: "POST",
-                    data : {page: 'header',
-                        command: 'Upload',
-                        description: $('#description').val(),
-                        name: $('#factor-name').val(),
-                        price: price,
-                        productivity: productivity,
-                        entertainment: entertainment,
-                        utility: utility,
-                        quick_app: quick_app
-                    },
+                    url: 'action.php',
+                    type: 'POST',
+                    page: 'header',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
                     success: function(data)
                     {
                         const code = JSON.parse(data);
-                        if (code === 0)
-                            alert('Uploaded successfully');
+                        if (code === true || code === 'true')
+                        {
+                            let productivity,
+                                entertainment,
+                                utility,
+                                quick_app,
+                                price;
+
+                            if($('#productivity-checkbox').is(":checked"))
+                                productivity = 1;
+                            else
+                                productivity = 0;
+
+                            if($('#entertainment-checkbox').is(":checked"))
+                                entertainment = 1;
+                            else
+                                entertainment = 0;
+
+                            if($('#utility-checkbox').is(":checked"))
+                                utility = 1;
+                            else
+                                utility = 0;
+
+                            if($('#quick-app-checkbox').is(":checked"))
+                                quick_app = 1;
+                            else
+                                quick_app = 0;
+
+                            price = $('#upload-price').val();
+                            if (price.length < 1)
+                                price = 0;
+
+
+                            $.ajax(
+                                {
+                                    url : 'ajax.php',
+                                    type: "POST",
+                                    data : {page: 'header',
+                                        command: 'Upload',
+                                        description: $('#description').val(),
+                                        name: $('#factor-name').val(),
+                                        price: price,
+                                        productivity: productivity,
+                                        entertainment: entertainment,
+                                        utility: utility,
+                                        quick_app: quick_app
+                                    },
+                                    success: function(data)
+                                    {
+                                        const code = JSON.parse(data);
+                                        if (code === 0 || code === '0')
+                                        {
+                                            $("#upload-modal").modal('hide');
+                                            alert("Uploaded successfully");
+                                        }
+                                        else
+                                            alert('An error occurred, code: ' + code);
+
+                                        filterList('no filter');
+
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown)
+                                    {
+                                        alert("Error: " + errorThrown);
+                                    }
+                                });
+                        }
                         else
-                            alert('An error occurred, code: ' + code);
+                            alert('An error occurred: ' + code);
 
                         filterList('no filter');
 
@@ -530,7 +568,8 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
                     {
                         alert("Error: " + errorThrown);
                     }
-                });
+                }
+            );
         })
 
         $('#search-button').click(function ()
@@ -669,5 +708,6 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
                 }
             });
     }
+
 
 </script>

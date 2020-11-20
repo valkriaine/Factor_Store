@@ -19,15 +19,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c4f59730-e963-4cba-ac32-b8269a334731" name="Default Changelist" comment="partially finished upload feature and banners">
+    <list default="true" id="c4f59730-e963-4cba-ac32-b8269a334731" name="Default Changelist" comment="implemented comment feature (need restyling)">
+      <change afterPath="$PROJECT_DIR$/action.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ajax.php" beforeDir="false" afterPath="$PROJECT_DIR$/ajax.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner.php" beforeDir="false" afterPath="$PROJECT_DIR$/banner.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/carousel.php" beforeDir="false" afterPath="$PROJECT_DIR$/carousel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/header.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model_factor.php" beforeDir="false" afterPath="$PROJECT_DIR$/model_factor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/model_user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/3.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/store_page.php" beforeDir="false" afterPath="$PROJECT_DIR$/store_page.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +96,8 @@
       <updated>1605663930518</updated>
       <workItem from="1605663932515" duration="27124000" />
       <workItem from="1605694746518" duration="8937000" />
-      <workItem from="1605743917892" duration="40260000" />
+      <workItem from="1605743917892" duration="40522000" />
+      <workItem from="1605831939132" duration="13076000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1605698861439</created>
@@ -133,7 +134,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605768763534</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="implemented comment feature (need restyling)">
+      <created>1605787243942</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1605787243942</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,13 +157,15 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
     <MESSAGE value="finished user log in and log out features" />
     <MESSAGE value="finished user account management features" />
     <MESSAGE value="partially finished upload feature and banners" />
-    <option name="LAST_COMMIT_MESSAGE" value="partially finished upload feature and banners" />
+    <MESSAGE value="implemented comment feature (need restyling)" />
+    <option name="LAST_COMMIT_MESSAGE" value="implemented comment feature (need restyling)" />
   </component>
   <component name="WindowStateProjectService">
     <state x="605" y="211" key="#CLI_Interpreters" timestamp="1605669699168">
@@ -186,17 +196,17 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="898" y="454" key="Github.ShareDialog/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605703675824" />
-    <state x="860" y="480" key="NewPhpFileDialog" timestamp="1605687773778">
+    <state x="860" y="480" key="NewPhpFileDialog" timestamp="1605837825498">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="860" y="480" key="NewPhpFileDialog/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605687773778" />
+    <state x="860" y="480" key="NewPhpFileDialog/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605837825498" />
     <state x="710" y="257" key="SettingsEditor" timestamp="1605703661695">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="710" y="257" key="SettingsEditor/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605703661695" />
-    <state x="744" y="295" key="Vcs.Push.Dialog.v2" timestamp="1605769469276">
+    <state x="744" y="295" key="Vcs.Push.Dialog.v2" timestamp="1605787248149">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="744" y="295" key="Vcs.Push.Dialog.v2/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605769469276" />
+    <state x="744" y="295" key="Vcs.Push.Dialog.v2/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605787248149" />
   </component>
 </project>

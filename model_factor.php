@@ -35,12 +35,8 @@ function upload($description,
         $result =  mysqli_query($conn, $sql);
         if ($result == true)
         {
-            //update file paths
-            $result_update = update_paths($name);
-            if ($result_update == true)
-                return 0;
-            else
-                return 56;
+            $_SESSION['widget_name'] = $name;
+            return 0;
         }
         else
             return mysqli_error($conn);
@@ -83,13 +79,14 @@ function get_first_three_widgets()
     return $data;
 }
 
+
 function update_paths($name)
 {
     global $conn;
     $id = get_id_factor($name);
-    $path = "downloads/".$id.".html";
-    $icon_path = "download_resources/".$id."_icon.jpg";
-    $splash_path = "download_resources/".$id."_splash.jpg";
+    $path = $_SESSION['package_path'];
+    $icon_path = $_SESSION['icon_image_path'];
+    $splash_path = $_SESSION['splash_image_path'];
 
     $sql = "UPDATE `FACTOR` SET 
     `PATH` = '$path', 
@@ -97,7 +94,11 @@ function update_paths($name)
     `SPLASH_PATH` = '$splash_path'
     where `ID` = '$id' ";
 
-    return mysqli_query($conn, $sql);
+    $result = mysqli_query($conn, $sql);
+    if ($result == true)
+        return true;
+    else
+        return mysqli_error($conn);
 
 
 }
