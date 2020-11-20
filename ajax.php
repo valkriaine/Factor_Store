@@ -278,7 +278,8 @@ else
                 $result = add_cart($item_id, $user_id);
                 echo json_encode($result);
             }
-            echo json_encode("You are not signed in");
+            else
+                echo json_encode("You are not signed in");
             break;
 
         case 'Add_Wishlist': //add a widget to wishlist
@@ -289,7 +290,8 @@ else
                 $result = add_wishlist($item_id, $user_id);
                 echo json_encode($result);
             }
-            echo json_encode("You are not signed in");
+            else
+                echo json_encode("You are not signed in");
             break;
 
         case 'Add_Favorite': //add a widget to favorites
@@ -300,7 +302,8 @@ else
                 $result = add_favorites($item_id, $user_id);
                 echo json_encode($result);
             }
-            echo json_encode("You are not signed in");
+            else
+                echo json_encode("You are not signed in");
             break;
 
         case 'Check_Cart': //return true if the current item is in cart
