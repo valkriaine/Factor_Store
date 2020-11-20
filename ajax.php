@@ -8,7 +8,7 @@ if (!isset($_SESSION['started']))
 }
 if (empty($_POST['page']))
 {
-    include_once('controller.php');
+    include_once('index.php');
     exit();
 }
 else
@@ -208,6 +208,13 @@ else
             echo json_encode(createList($result));
             break;
 
+        case 'Collection': //show widgets based on category selected
+            $collection = $_POST['collection'];
+            $user_id = $_SESSION['id'];
+            $result = get_collection($collection, $user_id);
+            echo json_encode(createList($result));
+            break;
+
 
 
         case 'Get_Widget': //retrieve widget info
@@ -249,12 +256,91 @@ else
         case 'Add_Comment': //add a new comment under the current widget
             $item_id = $_POST['item_id'];
             $comment = $_POST['comment'];
-            $user_id = $_SESSION['id'];
-            $result = add_comment($item_id, $user_id, $comment);
-            if ($result == true)
-                echo json_encode(generateComments(get_comments($item_id)));
+            if (isset($_SESSION['id']))
+            {
+                $user_id = $_SESSION['id'];
+                $result = add_comment($item_id, $user_id, $comment);
+                if ($result == true)
+                    echo json_encode(generateComments(get_comments($item_id)));
+                else
+                    echo json_encode("Error posting comment");
+            }
             else
-                echo json_encode("Error");
+                echo json_encode(-1);
+
+            break;
+
+        case 'Add_Cart': //add a widget to cart
+            $item_id = $_POST['item_id'];
+            if (isset($_SESSION['id']))
+            {
+                $user_id = $_SESSION['id'];
+                $result = add_cart($item_id, $user_id);
+                echo json_encode($result);
+            }
+            echo json_encode("You are not signed in");
+            break;
+
+        case 'Add_Wishlist': //add a widget to wishlist
+            $item_id = $_POST['item_id'];
+            if (isset($_SESSION['id']))
+            {
+                $user_id = $_SESSION['id'];
+                $result = add_wishlist($item_id, $user_id);
+                echo json_encode($result);
+            }
+            echo json_encode("You are not signed in");
+            break;
+
+        case 'Add_Favorite': //add a widget to favorites
+            $item_id = $_POST['item_id'];
+            if (isset($_SESSION['id']))
+            {
+                $user_id = $_SESSION['id'];
+                $result = add_favorites($item_id, $user_id);
+                echo json_encode($result);
+            }
+            echo json_encode("You are not signed in");
+            break;
+
+        case 'Check_Cart': //return true if the current item is in cart
+            $item_id = $_POST['item_id'];
+
+            if (isset($_SESSION['id']))
+            {
+                $user_id = $_SESSION['id'];
+                $result = check_cart($item_id, $user_id);
+                echo json_encode($result);
+            }
+            else echo json_encode(false);
+            break;
+
+        case 'Check_Wishlist': //return true if the current item is in wishlist
+            $item_id = $_POST['item_id'];
+            if (isset($_SESSION['id']))
+            {
+                $user_id = $_SESSION['id'];
+                $result = check_wishlist($item_id, $user_id);
+                echo json_encode($result);
+            }
+            else echo json_encode(false);
+            break;
+
+        case 'Check_Favorites': //return true if the current item is in favorites
+            $item_id = $_POST['item_id'];
+            if (isset($_SESSION['id']))
+            {
+                $user_id = $_SESSION['id'];
+                $result = check_favorites($item_id, $user_id);
+                echo json_encode($result);
+            }
+            else echo json_encode(false);
+            break;
+
+        case 'Update_Downloads': //update number of downloads for the widget
+            $item_id = $_POST['item_id'];
+            $result = update_downloads($item_id);
+            echo json_encode($result);
             break;
 
         case 'SignOut': //sign out and clear the session
@@ -284,7 +370,7 @@ function createList($data = array())
                 </div>
                 <h6>'.$row['DESCRIPTION'].'</h6>
                 <div class="d-flex justify-content-between install mt-3">
-                <span style=" font-size: 12px">'.$row['DOWNLOADS'].' downloads</span>
+                <span id="'.$row['ID'].'-downloads" style=" font-size: 12px">'.$row['DOWNLOADS'].' downloads</span>
                 <span class="text-primary">&nbsp;
                 <i class="fa fa-angle-right"></i>
                 </span>
@@ -302,15 +388,16 @@ function generateComments($data = array())
     if (sizeof($data) < 1)
         return "No comments available.";
     $list = '';
-    $forehead_question = '<td>';
-    $forehead_other = '<td style="text-align:center">';
+    $forehead_id = '<td style="text-align:left">';
+    $forehead_date = '<td style="text-align:left">';
+    $forehead_comment = '<td style="text-align:right">';
     $tail = '</td>';
     foreach ($data as $row)
     {
         $list = $list.'<tr>';
-        $list = $list.$forehead_question.get_name($row['USER_ID']) . $tail;
-        $list = $list. $forehead_other.$row['DATE'] . $tail;
-        $list = $list. $forehead_other . $row['COMMENT'] . $tail;
+        $list = $list.$forehead_id.get_name($row['USER_ID']) . $tail;
+        $list = $list. $forehead_date.$row['DATE'] . $tail;
+        $list = $list. $forehead_comment . $row['COMMENT'] . $tail;
         $list = $list.'</tr>';
     }
     return $list;

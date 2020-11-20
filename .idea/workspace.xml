@@ -22,6 +22,13 @@
     <list default="true" id="c4f59730-e963-4cba-ac32-b8269a334731" name="Default Changelist" comment="finished upload feature">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/action.php" beforeDir="false" afterPath="$PROJECT_DIR$/action.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ajax.php" beforeDir="false" afterPath="$PROJECT_DIR$/ajax.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/banner.php" beforeDir="false" afterPath="$PROJECT_DIR$/banner.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carousel.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_factor.php" beforeDir="false" afterPath="$PROJECT_DIR$/model_factor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_page.php" beforeDir="false" afterPath="$PROJECT_DIR$/store_page.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +97,7 @@
       <workItem from="1605663932515" duration="27124000" />
       <workItem from="1605694746518" duration="8937000" />
       <workItem from="1605743917892" duration="40522000" />
-      <workItem from="1605831939132" duration="14364000" />
+      <workItem from="1605831939132" duration="26781000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1605698861439</created>
@@ -141,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605845277609</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="finished upload feature">
+      <created>1605846727714</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1605846727714</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -197,18 +211,22 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="898" y="454" key="Github.ShareDialog/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605703675824" />
-    <state x="860" y="480" key="NewPhpFileDialog" timestamp="1605837825498">
+    <state x="860" y="480" key="NewPhpFileDialog" timestamp="1605849505725">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="860" y="480" key="NewPhpFileDialog/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605837825498" />
+    <state x="860" y="480" key="NewPhpFileDialog/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605849505725" />
+    <state x="817" y="259" key="RollbackChangesDialog" timestamp="1605858499582">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="817" y="259" key="RollbackChangesDialog/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605858499582" />
     <state x="710" y="257" key="SettingsEditor" timestamp="1605703661695">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="710" y="257" key="SettingsEditor/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605703661695" />
-    <state x="744" y="295" key="Vcs.Push.Dialog.v2" timestamp="1605845284993">
+    <state x="744" y="295" key="Vcs.Push.Dialog.v2" timestamp="1605846737038">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="744" y="295" key="Vcs.Push.Dialog.v2/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605845284993" />
+    <state x="744" y="295" key="Vcs.Push.Dialog.v2/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605846737038" />
     <state x="842" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605846722984">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>

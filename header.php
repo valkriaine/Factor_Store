@@ -1,7 +1,7 @@
 <?php
 if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
 {
-    header("https://cs.tru.ca/~ywangf20/Project/controller.php");
+    header("index.php");
     die();
 }
 
@@ -63,10 +63,10 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
                         <a class="dropdown-item" id="dropdown-settings" href="#settings-modal" data-toggle="modal">Settings</a>
                         <a class="dropdown-item" id="dropdown-upload" href="#upload-modal" data-toggle="modal">Upload</a>
                         <!--todo-->
-                        <a class="dropdown-item" id="dropdown-my-cart" href="#" data-toggle="modal">My Cart</a>
-                        <a class="dropdown-item" id="dropdown-wishlist" href="#" data-toggle="modal">Wishlist</a>
-                        <a class="dropdown-item" id="dropdown-favorites" href="#" data-toggle="modal">Favorites</a>
-                        <a class="dropdown-item" id="dropdown-sign-out" href="#" data-toggle="modal">Sign Out</a>
+                        <a class="dropdown-item" id="dropdown-my-cart" onclick="showCollection('CART')">My Cart</a>
+                        <a class="dropdown-item" id="dropdown-wishlist" onclick="showCollection('WISHLIST')">Wishlist</a>
+                        <a class="dropdown-item" id="dropdown-favorites" onclick="showCollection('FAVORITES')">Favorites</a>
+                        <a class="dropdown-item" id="dropdown-sign-out" data-toggle="modal">Sign Out</a>
                     </div>
                 </div>
 
@@ -594,6 +594,8 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
                     }
                 });
         })
+
+
     })
 
     function checkSignedIn()
@@ -709,5 +711,23 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
             });
     }
 
+    function showCollection(type)
+    {
+        $.ajax(
+            {
+                url : 'ajax.php',
+                type: "POST",
+                data : {page: 'header', command: 'Collection', collection: type},
+                success: function(data)
+                {
+                    const list = JSON.parse(data);
+                    $('#factor-list').html(list);
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert("Error: " + errorThrown);
+                }
+            });
+    }
 
 </script>

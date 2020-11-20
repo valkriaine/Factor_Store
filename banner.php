@@ -1,5 +1,5 @@
 <?php
-function create_banner($name, $description, $icon, $splash)
+function create_banner($id, $name, $description, $icon, $splash)
 {
     echo '<div class="card bg-dark text-white">';
     echo '<img src=';
@@ -8,7 +8,7 @@ function create_banner($name, $description, $icon, $splash)
     echo ' <div class="card-img-overlay row">
         <div class="card text-center w-50 mx-auto" style="max-width: 540px; max-height: 200px; background-color: dimgray">
             <div class="row no-gutters" >
-                <div class="col-md-4">
+                <div class="col-md-4" id="'.$id.'">
                     <img src="'.$icon.'" style="height: 150px; width: 150px; margin 50px"  class="card-img align-self-center" alt="...">
                 </div>
                 <div class="col-md-8 card-body" style="background-color:dimgray">
@@ -21,7 +21,7 @@ function create_banner($name, $description, $icon, $splash)
 </div>';
 }
 ?>
-<!-- todo: restyle this to be more responsive and visually appealing
+<!--
 <head>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"

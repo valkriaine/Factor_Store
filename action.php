@@ -36,9 +36,9 @@ if (!isset($_SESSION['started']))
         $error_icon = "";
 
 //html
-    if($fileType_package != "html")
+    if($fileType_package != "exe")
     {
-        $error_package = "Package: Sorry, please upload .html file.";
+        $error_package = "Package: Sorry, please upload .exe file.";
         $uploadOk_package = 0;
     }
 

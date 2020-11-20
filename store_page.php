@@ -3,19 +3,59 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
 {
     die();
 }
-include_once("carousel.php");
+$data = get_first_three_widgets();
+
+//display prompted widgets in the carousel
+function create_banners($data = array())
+{
+    echo "<div class='carousel-inner'>";
+    $item_forehead = "<div class='carousel-item'>";
+    $item_forehead_active = "<div class='carousel-item active'>";
+    $item_tail = "</div>";
+    foreach ($data as $key => $row)
+    {
+        if ($key == 0)
+        {
+            echo $item_forehead_active;
+        }
+        else
+            echo $item_forehead;
+        create_banner($row['ID'], $row['NAME'], $row['DESCRIPTION'], $row['ICON_PATH'], $row['SPLASH_PATH']);
+        echo $item_tail;
+    }
+    echo "</div>";
+}
+
 ?>
 <html lang="en">
 <body style="background: #eee">
+
+<div id="carousel"
+     style="margin: 0 200px; height: 400px"
+     class="carousel slide"
+     data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+
+    <?php create_banners($data); ?>
+
+    <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
 
 <div class="container mt-5">
     <div class="row" id="factor-list">
     </div>
 </div>
-
-
-
-
 
 
 
@@ -82,10 +122,10 @@ include_once("carousel.php");
             </div>
             <div class="modal-footer sticky-bottom">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-primary" id="download-button">Download</button>
-                    <button type="button" class="btn btn-info">Add to Cart</button>
-                    <button type="button" class="btn btn-secondary">Add to Favorites</button>
-                    <button type="button" class="btn btn-secondary">Add to Wishlist</button>
+                    <a type="button" class="btn btn-primary" id="download-link" onclick="updateDownloads()">Download</a>
+                    <button type="button" class="btn btn-info" id="add-cart-button">Add to Cart</button>
+                    <button type="button" class="btn btn-secondary" id="add-favorite-button">Add to Favorites</button>
+                    <button type="button" class="btn btn-secondary" id="add-wishlist-button">Add to Wishlist</button>
                 </div>
             </div>
         </div>
@@ -153,12 +193,11 @@ include_once("carousel.php");
                 }
             });
 
-
         //click event to open widget modals
         $(document).on("click", "div.col-md-4" , function()
         {
-            const text = $(this).attr('id');
-            current_id = text;
+            const id = $(this).attr('id');
+            current_id = id;
             $.ajax(
                 {
                     url : 'ajax.php',
@@ -166,7 +205,7 @@ include_once("carousel.php");
                     data : {
                         page: 'store_page',
                         command: 'Get_Widget',
-                        get_id: text
+                        get_id: id
                     },
                     success: function(data)
                     {
@@ -183,10 +222,14 @@ include_once("carousel.php");
                         const price = current_widget[7];
                         $('#factor-price').val(price);
 
+                        let link = $('#download-link');
+                        link.attr('href', current_widget[4]);
+
                         if (price > 0)
-                            $('#download-button').text("Purchase");
+                            link.text("Purchase");
                         else
-                            $('#download-button').text("Download");
+                            link.text("Download");
+
 
                         let productivity = current_widget[8],
                             entertainment = current_widget[9],
@@ -213,6 +256,12 @@ include_once("carousel.php");
                         else
                             $('#factor-quick-app-checkbox').attr('checked', false);
 
+
+                        checkCart();
+                        checkFavorite();
+                        checkWishlist();
+
+
                     },
                     error: function (jqXHR, textStatus, errorThrown)
                     {
@@ -220,7 +269,6 @@ include_once("carousel.php");
                     }
                 });
         });
-
 
         $('#show-comments-button').click(function ()
         {
@@ -246,15 +294,11 @@ include_once("carousel.php");
                 });
         })
 
-
-
         $('#comment-button').click(function ()
         {
             const comment = $('#comment-input').val();
             if (comment.length < 1)
                 return
-
-
             $.ajax(
                 {
                     url : 'ajax.php',
@@ -268,7 +312,10 @@ include_once("carousel.php");
                     success: function(data)
                     {
                         const list = JSON.parse(data);
-                        $('#comment-section').html(list);
+                        if (list === -1 || list === '-1')
+                            alert("You are not signed in")
+                        else
+                            $('#comment-section').html(list);
 
                     },
                     error: function (jqXHR, textStatus, errorThrown)
@@ -278,9 +325,96 @@ include_once("carousel.php");
                 });
         })
 
+        $('#add-cart-button').click(function ()
+        {
+            $.ajax(
+                {
+                    url : 'ajax.php',
+                    type: "POST",
+                    data : {
+                        page: 'store_page',
+                        command: 'Add_Cart',
+                        item_id: current_id,
+                    },
+                    success: function(data)
+                    {
+                        const code = JSON.parse(data);
+                        if (code === 1 || code ==='1')
+                            alert("added to cart");
+                        else if (code === 0 || code === '0')
+                            alert ("removed from cart");
+                        else
+                            alert(code);
+                        checkCart()
 
+                    },
+                    error: function (jqXHR, textStatus, errorThrown)
+                    {
+                        alert("Error: " + errorThrown);
+                    }
+                });
+        })
+
+        $('#add-wishlist-button').click(function ()
+        {
+            $.ajax(
+                {
+                    url : 'ajax.php',
+                    type: "POST",
+                    data : {
+                        page: 'store_page',
+                        command: 'Add_Wishlist',
+                        item_id: current_id,
+                    },
+                    success: function(data)
+                    {
+                        const code = JSON.parse(data);
+                        if (code === 1 || code ==='1')
+                            alert("added to wishlist");
+                        else if (code === 0 || code === '0')
+                            alert ("removed from wishlist");
+                        else
+                            alert(code);
+                        checkWishlist();
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown)
+                    {
+                        alert("Error: " + errorThrown);
+                    }
+                });
+        })
+
+        $('#add-favorite-button').click(function ()
+        {
+            $.ajax(
+                {
+                    url : 'ajax.php',
+                    type: "POST",
+                    data : {
+                        page: 'store_page',
+                        command: 'Add_Favorite',
+                        item_id: current_id,
+                    },
+                    success: function(data)
+                    {
+                        const code = JSON.parse(data);
+                        if (code === 1 || code ==='1')
+                            alert("added to favorites");
+                        else if (code === 0 || code === '0')
+                            alert ("removed from favorites");
+                        else
+                            alert(code);
+                        checkFavorite();
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown)
+                    {
+                        alert("Error: " + errorThrown);
+                    }
+                });
+        })
     })
-
 
     function getAuthorName(id)
     {
@@ -305,5 +439,113 @@ include_once("carousel.php");
             });
     }
 
+    function checkCart()
+    {
+        $.ajax(
+            {
+                url : 'ajax.php',
+                type: "POST",
+                data : {
+                    page: 'store_page',
+                    command: 'Check_Cart',
+                    item_id: current_id,
+                },
+                success: function(data)
+                {
+                    const code = JSON.parse(data);
+                    if (code === true || code ==='true')
+                        $('#add-cart-button').text("Remove From Cart");
+                    else
+                        $('#add-cart-button').text("Add to Cart");
+
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert("Error: " + errorThrown);
+                }
+            });
+    }
+
+    function checkWishlist()
+    {
+        $.ajax(
+            {
+                url : 'ajax.php',
+                type: "POST",
+                data : {
+                    page: 'store_page',
+                    command: 'Check_Wishlist',
+                    item_id: current_id,
+                },
+                success: function(data)
+                {
+                    const code = JSON.parse(data);
+                    if (code === true || code ==='true')
+                        $('#add-wishlist-button').text("Remove From Wishlist");
+                    else
+                        $('#add-wishlist-button').text("Add to Wishlist");
+
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert("Error: " + errorThrown);
+                }
+            });
+    }
+
+    function checkFavorite()
+    {
+        $.ajax(
+            {
+                url : 'ajax.php',
+                type: "POST",
+                data : {
+                    page: 'store_page',
+                    command: 'Check_Favorites',
+                    item_id: current_id,
+                },
+                success: function(data)
+                {
+                    const code = JSON.parse(data);
+                    if (code === true || code ==='true')
+                        $('#add-favorite-button').text("Remove From Favorites");
+                    else
+                        $('#add-favorite-button').text("Add to Favorites");
+
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert("Error: " + errorThrown);
+                }
+            });
+    }
+
+    function updateDownloads()
+    {
+        $.ajax(
+            {
+                url : 'ajax.php',
+                type: "POST",
+                data : {
+                    page: 'store_page',
+                    command: 'Update_Downloads',
+                    item_id: current_id,
+                },
+                success: function(data)
+                {
+                    const code = JSON.parse(data);
+                    if (code === -1 || code ==='-1')
+                        console.log("error updating downloads number");
+                    else
+                        $('#' + current_id + '-downloads').text(code + " downloads");
+
+
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert("Error: " + errorThrown);
+                }
+            });
+    }
 
 </script>

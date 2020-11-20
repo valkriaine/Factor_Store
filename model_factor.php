@@ -187,3 +187,147 @@ function add_comment($item_id, $user_id, $comment)
     else
         return -1;
 }
+
+function add_cart($item_id, $user_id)
+{
+    global $conn;
+
+    if (check_cart($item_id, $user_id))
+    {
+        $sql = "DELETE FROM CART WHERE USER_ID = $user_id AND FACTOR_ID = $item_id";
+        $result = mysqli_query($conn, $sql);
+        if ($result == true)
+            return 0; //deleted
+        else
+            return -1;
+    }
+    else
+    {
+        $sql = "INSERT INTO CART VALUES ('$user_id', '$item_id')";
+        $result = mysqli_query($conn, $sql);
+        if ($result == true)
+            return 1; //added
+        else
+            return -1;
+    }
+}
+
+
+function add_wishlist($item_id, $user_id)
+{
+    global $conn;
+
+    if (check_wishlist($item_id, $user_id))
+    {
+        $sql = "DELETE FROM WISHLISTS WHERE USER_ID = $user_id AND FACTOR_ID = $item_id";
+        $result = mysqli_query($conn, $sql);
+        if ($result == true)
+            return 0; //deleted
+        else
+            return -1;
+    }
+    else
+    {
+        $sql = "INSERT INTO WISHLISTS VALUES ('$user_id', '$item_id')";
+        $result = mysqli_query($conn, $sql);
+        if ($result == true)
+            return 1; //added
+        else
+            return -1;
+    }
+}
+
+function add_favorites($item_id, $user_id)
+{
+    global $conn;
+
+    if (check_favorites($item_id, $user_id))
+    {
+        $sql = "DELETE FROM FAVORITES WHERE USER_ID = $user_id AND FACTOR_ID = $item_id";
+        $result = mysqli_query($conn, $sql);
+        if ($result == true)
+            return 0; //deleted
+        else
+            return -1;
+    }
+    else
+    {
+        $sql = "INSERT INTO FAVORITES VALUES ('$user_id', '$item_id')";
+        $result = mysqli_query($conn, $sql);
+        if ($result == true)
+            return 1; //added
+        else
+            return -1;
+    }
+}
+
+
+function get_collection($collection, $user_id)
+{
+    global $conn;
+    if ($collection == 'CART')
+    {
+        $sql = "select * from FACTOR f join CART c on f.ID = c.FACTOR_ID  where c.USER_ID = $user_id";
+    }
+    else if ($collection == 'WISHLIST')
+    {
+        $sql = "select * from FACTOR f join WISHLISTS c on f.ID = c.FACTOR_ID  where c.USER_ID = $user_id";
+    }
+    else if ($collection == 'FAVORITES')
+    {
+        $sql = "select * from FACTOR f join FAVORITES c on f.ID = c.FACTOR_ID  where c.USER_ID = $user_id";
+    }
+    else
+        $sql = "select * from FACTOR";
+
+    $result = mysqli_query($conn, $sql);
+    $data = [];
+    while($row = mysqli_fetch_assoc($result))
+        $data[] = $row;
+    return $data;
+}
+
+function check_cart($item_id, $user_id)
+{
+    global $conn;
+    $sql = "SELECT * FROM CART WHERE FACTOR_ID = $item_id AND USER_ID = $user_id";
+    $result = mysqli_query($conn, $sql);
+    return (mysqli_num_rows($result) > 0);
+}
+
+function check_wishlist($item_id, $user_id)
+{
+    global $conn;
+    $sql = "SELECT * FROM WISHLISTS WHERE FACTOR_ID = $item_id AND USER_ID = $user_id";
+    $result = mysqli_query($conn, $sql);
+    return (mysqli_num_rows($result) > 0);
+}
+
+function check_favorites($item_id, $user_id)
+{
+    global $conn;
+    $sql = "SELECT * FROM FAVORITES WHERE FACTOR_ID = $item_id AND USER_ID = $user_id";
+    $result = mysqli_query($conn, $sql);
+    return (mysqli_num_rows($result) > 0);
+}
+
+function update_downloads($item_id)
+{
+    global $conn;
+
+    $sql = "UPDATE FACTOR SET 
+    DOWNLOADS = DOWNLOADS + 1
+    where ID = $item_id";
+
+    if (mysqli_query($conn, $sql))
+    {
+        $sql = "SELECT DOWNLOADS FROM FACTOR where ID = $item_id";
+        $result = mysqli_query($conn, $sql);
+        $downloads = 0;
+        while($row = mysqli_fetch_assoc($result))
+            $downloads = $row['DOWNLOADS'];
+        return $downloads;
+    }
+    else
+        return -1; //sql error
+}
