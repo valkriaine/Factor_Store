@@ -19,16 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c4f59730-e963-4cba-ac32-b8269a334731" name="Default Changelist" comment="implemented comment feature (need restyling)">
-      <change afterPath="$PROJECT_DIR$/action.php" afterDir="false" />
+    <list default="true" id="c4f59730-e963-4cba-ac32-b8269a334731" name="Default Changelist" comment="finished upload feature">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ajax.php" beforeDir="false" afterPath="$PROJECT_DIR$/ajax.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model_factor.php" beforeDir="false" afterPath="$PROJECT_DIR$/model_factor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_page.php" beforeDir="false" afterPath="$PROJECT_DIR$/store_page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/action.php" beforeDir="false" afterPath="$PROJECT_DIR$/action.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +90,7 @@
       <workItem from="1605663932515" duration="27124000" />
       <workItem from="1605694746518" duration="8937000" />
       <workItem from="1605743917892" duration="40522000" />
-      <workItem from="1605831939132" duration="13076000" />
+      <workItem from="1605831939132" duration="14364000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1605698861439</created>
@@ -141,7 +134,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605787243942</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="finished upload feature">
+      <created>1605845277609</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1605845277609</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,7 +165,8 @@
     <MESSAGE value="finished user account management features" />
     <MESSAGE value="partially finished upload feature and banners" />
     <MESSAGE value="implemented comment feature (need restyling)" />
-    <option name="LAST_COMMIT_MESSAGE" value="implemented comment feature (need restyling)" />
+    <MESSAGE value="finished upload feature" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished upload feature" />
   </component>
   <component name="WindowStateProjectService">
     <state x="605" y="211" key="#CLI_Interpreters" timestamp="1605669699168">
@@ -204,9 +205,13 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="710" y="257" key="SettingsEditor/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605703661695" />
-    <state x="744" y="295" key="Vcs.Push.Dialog.v2" timestamp="1605787248149">
+    <state x="744" y="295" key="Vcs.Push.Dialog.v2" timestamp="1605845284993">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="744" y="295" key="Vcs.Push.Dialog.v2/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605787248149" />
+    <state x="744" y="295" key="Vcs.Push.Dialog.v2/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605845284993" />
+    <state x="842" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605846722984">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="842" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605846722984" />
   </component>
 </project>

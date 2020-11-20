@@ -38,7 +38,7 @@ if (!isset($_SESSION['started']))
 //html
     if($fileType_package != "html")
     {
-        $error_package = "Sorry, please upload .html file.";
+        $error_package = "Package: Sorry, please upload .html file.";
         $uploadOk_package = 0;
     }
 
@@ -56,7 +56,7 @@ if (!isset($_SESSION['started']))
         }
         else
         {
-            $error_package = "Sorry, there was an error uploading your file.";
+            $error_package = "Package: Sorry, there was an error uploading your file.";
             $_SESSION['package_uploaded'] = false;
         }
     }
@@ -68,7 +68,7 @@ if (!isset($_SESSION['started']))
 // splash
     if($fileType_splash != "jpg" && $fileType_splash != "png" && $fileType_splash != "jpeg" && $fileType_splash!= "gif" )
     {
-        $error_splash = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        $error_splash = "Splash: Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
         $uploadOk_splash = 0;
     }
 
@@ -86,7 +86,7 @@ if (!isset($_SESSION['started']))
         }
         else
         {
-            $error_splash = "Sorry, there was an error uploading your file.";
+            $error_splash = "Splash: Sorry, there was an error uploading your file.";
             $_SESSION['splash_uploaded'] = false;
         }
     }
@@ -94,9 +94,9 @@ if (!isset($_SESSION['started']))
 
 
 // icon
-    if($fileType_icon= "jpg" && $fileType_icon != "png" && $fileType_icon != "jpeg" && $fileType_icon != "gif" )
+    if($fileType_icon != "jpg" && $fileType_icon != "png" && $fileType_icon != "jpeg" && $fileType_icon != "gif" )
     {
-        $error_icon = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        $error_icon = "icon: Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
         $uploadOk_icon = 0;
     }
 
@@ -114,7 +114,7 @@ if (!isset($_SESSION['started']))
         }
         else
         {
-            $error_icon = "Sorry, there was an error uploading your file.";
+            $error_icon = "icon: Sorry, there was an error uploading your file.";
             $_SESSION['icon_uploaded'] = false;
         }
     }
