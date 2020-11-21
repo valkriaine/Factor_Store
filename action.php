@@ -23,13 +23,13 @@ if (!isset($_SESSION['started']))
         $fileType_icon = strtolower(pathinfo($icon_file,PATHINFO_EXTENSION));
 
         $temp_package = explode(".", $_FILES["factor-upload"]["name"]);
-        $new_file_name_package = round(microtime(true)) . '.' . end($temp_package);
+        $new_file_name_package = "package_".round(microtime(true)) . '.' . end($temp_package);
 
         $temp_splash = explode(".", $_FILES["splash-upload"]["name"]);
-        $new_file_name_splash = round(microtime(true)) . '.' . end($temp_splash);
+        $new_file_name_splash = "splash_".round(microtime(true)) . '.' . end($temp_splash);
 
         $temp_icon = explode(".", $_FILES["icon-upload"]["name"]);
-        $new_file_name_icon = round(microtime(true)) . '.' . end($temp_icon);
+        $new_file_name_icon = "icon_".round(microtime(true)) . '.' . end($temp_icon);
 
         $error_package = "";
         $error_splash = "";

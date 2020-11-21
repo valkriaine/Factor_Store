@@ -467,6 +467,25 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
                         {
                             checkSignedIn();
                             alert("Account deleted. You are now logged off.");
+                            $.ajax(
+                                {
+                                    url : 'ajax.php',
+                                    type: "POST",
+                                    data : {
+                                        page: 'store_page', command: 'Search',
+                                        term: ""
+                                    },
+                                    success: function(data)
+                                    {
+                                        const list = JSON.parse(data);
+                                        $('#factor-list').html(list);
+
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown)
+                                    {
+                                        alert("Error: " + errorThrown);
+                                    }
+                                });
                         }
                         else
                             alert("an error occurred");

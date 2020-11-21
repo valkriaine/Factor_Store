@@ -164,7 +164,6 @@ function filter_factor($category)
     return $data;
 }
 
-
 function get_comments($item_id)
 {
     global $conn;

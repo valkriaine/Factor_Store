@@ -151,7 +151,14 @@ function delete_user($id)
     {
         $result =  session_unset();  //deleted successfully
         session_destroy();
-        return $result;
+
+        //if the account is of type designer, delete all the widgets that this user has created
+        $delete_sql = "DELETE FROM FACTOR where CREATOR = $id";
+        $delete_result = mysqli_query($conn, $delete_sql);
+        if ($delete_result == true)
+            return $result;
+        else
+            return mysqli_error($conn);
     }
     else
         return mysqli_error($conn); //sql error

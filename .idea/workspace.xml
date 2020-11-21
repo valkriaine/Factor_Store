@@ -19,12 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c4f59730-e963-4cba-ac32-b8269a334731" name="Default Changelist" comment="added dummy resources">
+    <list default="true" id="c4f59730-e963-4cba-ac32-b8269a334731" name="Default Changelist" comment="fixed a bug when sql statements syntax error when values contain illegal characters">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ajax.php" beforeDir="false" afterPath="$PROJECT_DIR$/ajax.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/action.php" beforeDir="false" afterPath="$PROJECT_DIR$/action.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_factor.php" beforeDir="false" afterPath="$PROJECT_DIR$/model_factor.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/model_user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_page.php" beforeDir="false" afterPath="$PROJECT_DIR$/store_page.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +99,7 @@
       <workItem from="1605831939132" duration="26830000" />
       <workItem from="1605865533119" duration="2031000" />
       <workItem from="1605872484696" duration="383000" />
-      <workItem from="1605926203735" duration="2371000" />
+      <workItem from="1605926203735" duration="3515000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1605698861439</created>
@@ -178,7 +178,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605866967372</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="fixed a bug when sql statements syntax error when values contain illegal characters">
+      <created>1605928769254</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1605928769254</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,7 +214,8 @@
     <MESSAGE value="finished user collection features" />
     <MESSAGE value="complete" />
     <MESSAGE value="added dummy resources" />
-    <option name="LAST_COMMIT_MESSAGE" value="added dummy resources" />
+    <MESSAGE value="fixed a bug when sql statements syntax error when values contain illegal characters" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed a bug when sql statements syntax error when values contain illegal characters" />
   </component>
   <component name="WindowStateProjectService">
     <state x="605" y="211" key="#CLI_Interpreters" timestamp="1605669699168">
