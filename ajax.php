@@ -34,7 +34,7 @@ else
             {
                 $ID = get_id($username);
                 $_SESSION['SignIn'] = 'YES';
-                $_SESSION['username'] = $username;
+                $_SESSION['factor_username'] = $username;
                 $_SESSION['id'] = $ID;
                 $_SESSION['type'] = get_user_type($ID);
                 echo json_encode($validity);
@@ -55,7 +55,7 @@ else
             else //registered successfully
             {
                 $_SESSION['SignIn'] = 'YES';
-                $_SESSION['username'] = $username;
+                $_SESSION['factor_username'] = $username;
                 $_SESSION['id'] = get_id($username);
                 $_SESSION['type'] = get_user_type(get_id($username));
                 echo json_encode($code);
@@ -66,8 +66,13 @@ else
         case 'Get_Name': //retrieve username after logging in
             if(isset($_SESSION['SignIn']))
             {
-                $name = $_SESSION['username'];
-                echo json_encode($name);
+                if (isset($_SESSION['factor_username']))
+                {
+                    $name = $_SESSION['factor_username'];
+                    echo json_encode($name);
+                }
+                else
+                    echo json_encode(1);
             }
             else
             {

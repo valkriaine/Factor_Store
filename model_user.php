@@ -131,7 +131,7 @@ function update_user($name, $email, $password, $type)
     if (mysqli_query($conn, $sql))
     {
         $_SESSION['SignIn'] = 'YES';
-        $_SESSION['username'] = $name;
+        $_SESSION['factor_username'] = $name;
         $_SESSION['id'] = $id;
         $_SESSION['type'] = get_user_type($id);
         return 0; //updated successfully

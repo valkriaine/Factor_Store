@@ -19,9 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c4f59730-e963-4cba-ac32-b8269a334731" name="Default Changelist" comment="finished user collection features">
+    <list default="true" id="c4f59730-e963-4cba-ac32-b8269a334731" name="Default Changelist" comment="added dummy resources">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ajax.php" beforeDir="false" afterPath="$PROJECT_DIR$/ajax.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/model_user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_page.php" beforeDir="false" afterPath="$PROJECT_DIR$/store_page.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,12 +51,15 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
   <component name="ProjectId" id="1kRWYDBjRc96CFNUEoz2JHN90qq" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -91,7 +97,9 @@
       <workItem from="1605694746518" duration="8937000" />
       <workItem from="1605743917892" duration="40522000" />
       <workItem from="1605831939132" duration="26830000" />
-      <workItem from="1605865533119" duration="1266000" />
+      <workItem from="1605865533119" duration="2031000" />
+      <workItem from="1605872484696" duration="383000" />
+      <workItem from="1605926203735" duration="2371000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1605698861439</created>
@@ -156,7 +164,21 @@
       <option name="project" value="LOCAL" />
       <updated>1605861842005</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="complete">
+      <created>1605866818994</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1605866818994</updated>
+    </task>
+    <task id="LOCAL-00011" summary="added dummy resources">
+      <created>1605866967372</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1605866967372</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,6 +197,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="initial commit" />
     <MESSAGE value="finished user log in and log out features" />
     <MESSAGE value="finished user account management features" />
@@ -182,7 +205,9 @@
     <MESSAGE value="implemented comment feature (need restyling)" />
     <MESSAGE value="finished upload feature" />
     <MESSAGE value="finished user collection features" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished user collection features" />
+    <MESSAGE value="complete" />
+    <MESSAGE value="added dummy resources" />
+    <option name="LAST_COMMIT_MESSAGE" value="added dummy resources" />
   </component>
   <component name="WindowStateProjectService">
     <state x="605" y="211" key="#CLI_Interpreters" timestamp="1605669699168">
@@ -225,10 +250,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="710" y="257" key="SettingsEditor/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605703661695" />
-    <state x="744" y="295" key="Vcs.Push.Dialog.v2" timestamp="1605861845221">
+    <state x="744" y="295" key="Vcs.Push.Dialog.v2" timestamp="1605866973669">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="744" y="295" key="Vcs.Push.Dialog.v2/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605861845221" />
+    <state x="744" y="295" key="Vcs.Push.Dialog.v2/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1605866973669" />
     <state x="842" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605846722984">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>

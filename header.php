@@ -71,12 +71,10 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
                 </div>
 
                 <!--search bar-->
-            <form class="form-inline my-2 my-lg-0" style="margin-left: 15px">
-                <div class="input-group">
+                <div class="input-group my-2 my-lg-0" style="margin-left: 15px">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
                 <button class="btn btn-sm btn-outline-secondary" type="button" id="search-button">Search</button>
                 </div>
-            </form>
             </div>
         </div>
     </nav>
@@ -278,7 +276,7 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
                         <input name="icon-upload" type="file" class="form-control-file" data-icon="true"/><br />
                         <label class="control-label">Widget Banner: </label>
                         <input name="splash-upload" type="file" class="form-control-file" data-icon="true"> <br />
-                        <label class="control-label">Widget HTML File: </label>
+                        <label class="control-label">Widget HTML File (please upload any .exe file for now): </label>
                         <input name="factor-upload" type="file" class="form-control-file" data-icon="true">
                     </form>
 
@@ -316,13 +314,16 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
     $(document).ready(function()
     {
         checkSignedIn();
+
+        $('#search-input').on
+
         $('#register-button').click(function()
         {
             $.ajax(
                 {
                     url : 'ajax.php',
                     type: "POST",
-                    data : {page: 'header', command: 'Join', username: $('#username-register').val(), password: $('#password-register').val(), email: $('#email').val()},
+                    data : {page: 'header', command: 'Join', username: $('#username-register').val().replace("\'" , "").replace("\"" , ""), password: $('#password-register').val().replace("\'" , "").replace("\"" , ""), email: $('#email').val().replace("\'" , "").replace("\"" , "")},
                     success: function(data)
                     {
                         const message = JSON.parse(data);
@@ -350,7 +351,7 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
                 {
                     url : 'ajax.php',
                     type: "POST",
-                    data : {page: 'header', command: 'SignIn', username: $('#username-sign-in').val(), password: $('#password-sign-in').val()},
+                    data : {page: 'header', command: 'SignIn', username: $('#username-sign-in').val().replace("\'" , "").replace("\"" , ""), password: $('#password-sign-in').val().replace("\'" , "").replace("\"" , "")},
                     success: function(data)
                     {
                         const message = JSON.parse(data);
@@ -383,8 +384,8 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
 
         $("#settings-button").click(function()
         {
-            const password = $('#password-settings').val();
-            if (password !== $('#password-settings-confirm').val())
+            const password = $('#password-settings').val().replace("\'" , "").replace("\"" , "");
+            if (password !== $('#password-settings-confirm').val().replace("\'" , "").replace("\"" , ""))
             {
                 alert("Passwords do not match, please confirm again");
             }
@@ -395,9 +396,9 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
                         url : 'ajax.php',
                         type: "POST",
                         data : {page: 'header', command: 'Update',
-                            username: $('#username-settings').val(),
+                            username: $('#username-settings').val().replace("\'" , "").replace("\"" , ""),
                             password: password,
-                            email_settings: $('#email-settings').val(),
+                            email_settings: $('#email-settings').val().replace("\'" , "").replace("\"" , ""),
                             type: global_type
                         },
                         success: function(data)
@@ -530,8 +531,8 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
                                     type: "POST",
                                     data : {page: 'header',
                                         command: 'Upload',
-                                        description: $('#description').val(),
-                                        name: $('#factor-name').val(),
+                                        description: $('#description').val().replace("\'" , "").replace("\"" , ""),
+                                        name: $('#factor-name').val().replace("\'" , "").replace("\"" , ""),
                                         price: price,
                                         productivity: productivity,
                                         entertainment: entertainment,
@@ -580,7 +581,7 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) )
                     type: "POST",
                     data : {
                         page: 'store_page', command: 'Search',
-                        term: $('#search-input').val()
+                        term: $('#search-input').val().replace("\'" , "").replace("\"" , "")
                     },
                     success: function(data)
                     {

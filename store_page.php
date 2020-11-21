@@ -296,7 +296,7 @@ function create_banners($data = array())
 
         $('#comment-button').click(function ()
         {
-            const comment = $('#comment-input').val();
+            const comment = $('#comment-input').val().replace("\'" , "").replace("\"" , "");
             if (comment.length < 1)
                 return
             $.ajax(
